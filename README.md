@@ -1,19 +1,24 @@
-# Bedrock In-Process DLL Load Test
+# Bedrock DX12 Client – project scaffold
 
-This repository builds `Injector.exe` and `BedrockMenu.dll` for Windows x64.
+This repository is a **buildable Windows project scaffold**, not a Minecraft cheat client.
 
-1. Open Minecraft Bedrock on Windows.
-2. Run Injector.exe, select BedrockMenu.dll, find Minecraft, and click Inject DLL.
-3. If DLL loading is permitted, a **separate topmost Win32 test window** appears. INSERT toggles it.
+## Build
 
-## Limitations
+Run GitHub Actions > Build Windows x64 > Run workflow. Download the ZIP from Artifacts.
 
-- This is a real remote LoadLibrary attempt, not a Minecraft DirectX/ImGui hook.
-- The menu is a separate Win32 window created from the DLL thread. It is **not rendered inside Minecraft's framebuffer** and may be hidden by fullscreen exclusive mode.
-- No ESP, X-Ray, Kill Aura, version-specific game data access, or anti-cheat bypass.
-- Some Bedrock builds are protected/app-container processes; OpenProcess/CreateRemoteThread can be denied and injection may fail.
-- Remote LoadLibrary thread exit status is not a reliable 64-bit module-handle verification; the UI confirms only the load request, not module execution. Verify the visible test window.
-- DLL injection can be detected by Windows security software. Do not disable protection to run it.
+## Implemented
 
-Build locally: `cmake -S . -B build -A x64 && cmake --build build --config Release`.
-GitHub: Actions > Build Injector and Menu DLL > Run workflow > Artifacts.
+- C++20 / CMake x64 EXE and DLL targets
+- Windows DLL file picker
+- Exported DLL initialization and shutdown entry points
+- GitHub Actions build and ZIP packaging
+
+## Not implemented
+
+- Injection into Minecraft.Windows.exe
+- DX12 in-process rendering or Dear ImGui
+- Insert-key toggle and game input handling
+- Minecraft block/entity data access, X-Ray, ESP, combat modules
+- Server bypass or game version support
+
+The generated DLL cannot show a Minecraft in-game GUI. No live Windows build or game test was performed here.
