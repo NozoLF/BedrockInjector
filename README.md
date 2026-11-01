@@ -1,24 +1,17 @@
-# Bedrock DX12 Client – project scaffold
+# BedrockDX12Client – source project
 
-This repository is a **buildable Windows project scaffold**, not a Minecraft cheat client.
+## Status
+
+**Not a functional Minecraft in-game client.** The project builds `Injector.exe` and `BedrockMenu.dll`, but intentionally does not claim a working Minecraft DLL injection, DX12 render hook, ImGui UI, ESP, or X-Ray.
+
+The injector detects `Minecraft.Windows.exe`, reads its executable version where available, and lets the user select a DLL. It does **not** inject it. The DLL exports `BedrockMenuApiVersion` and `BedrockMenuCanAttach` for integration diagnostics. The latter returns false until a verified, compatible Minecraft integration is available. ESP provides a standalone world-to-screen projection algorithm for real camera matrices supplied by a future authorized data provider; X-Ray provides a real block identifier filter. Neither receives live game data.
 
 ## Build
 
-Run GitHub Actions > Build Windows x64 > Run workflow. Download the ZIP from Artifacts.
+GitHub Actions: Actions > Windows x64 > Run workflow. Download the ZIP under Artifacts.
 
-## Implemented
+Local Windows: `cmake -S . -B build -A x64` then `cmake --build build --config Release`.
 
-- C++20 / CMake x64 EXE and DLL targets
-- Windows DLL file picker
-- Exported DLL initialization and shutdown entry points
-- GitHub Actions build and ZIP packaging
+## Why integration is missing
 
-## Not implemented
-
-- Injection into Minecraft.Windows.exe
-- DX12 in-process rendering or Dear ImGui
-- Insert-key toggle and game input handling
-- Minecraft block/entity data access, X-Ray, ESP, combat modules
-- Server bypass or game version support
-
-The generated DLL cannot show a Minecraft in-game GUI. No live Windows build or game test was performed here.
+No verified in-process DX12 swapchain / command queue ownership or stable game-data API for the current Minecraft Bedrock version was available. Hard-coded offsets, guessed hooks and invented entity data are not substitutes for a working implementation. Do not disable antivirus protection to run unknown injectors.
