@@ -6,7 +6,7 @@ add_library(BedrockMenu SHARED BedrockMenu/dllmain.cpp BedrockMenu/Menu.cpp Bedr
 target_compile_definitions(BedrockMenu PRIVATE UNICODE _UNICODE NOMINMAX WIN32_LEAN_AND_MEAN)
 target_include_directories(BedrockMenu PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(BedrockMenu PRIVATE user32)
-add_executable(Injector WIN32 Injector/main.cpp Injector/ProcessManager.cpp)
+add_executable(Injector WIN32 Injector/main.cpp Injector/ProcessManager.cpp Injector/DllLoader.cpp)
 target_compile_definitions(Injector PRIVATE UNICODE _UNICODE NOMINMAX WIN32_LEAN_AND_MEAN)
 target_include_directories(Injector PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(Injector PRIVATE user32 comdlg32 version)
