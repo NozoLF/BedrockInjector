@@ -1,12 +1,17 @@
-# Bedrock Injector — DLL Loading Test
+# Bedrock DLL Picker
 
-Windows x64 C++20 demonstration of process discovery and DLL loading into an authorized target process.
+Windows x64 standalone application with DLL file chooser, Minecraft process detection and local DLL load test.
 
-## Build
-GitHub Actions > Build Windows Injector > Run workflow. Download `Injector-Windows-x64` artifact and extract both files into the same folder.
+**It does not inject DLLs into Minecraft or provide an in-game menu.** Loading a DLL into the picker process is not the same as loading it into Minecraft.
 
-## Use
-Launch an authorized x64 test process, enter its executable name, click Find process, then Load ClientTest.dll. A successful DLL load shows a Windows message box in the target process.
+## GitHub build
 
-## Limitations
-This is a **generic DLL loading test**, not a functioning Minecraft Bedrock cheat client. It does not implement an ImGui in-game menu, ESP, X-Ray, Kill Aura, or bypasses. Minecraft may block injection or behave differently depending on platform protections and version. The local `LoadLibraryW` address is not guaranteed to be valid in every remote process. No universal compatibility is claimed.
+Upload all project files including `.github/workflows/windows.yml` to GitHub. Open Actions > Build Windows EXE > Run workflow, then download the artifact.
+
+## Local build
+
+`cmake -S . -B build -A x64`
+
+`cmake --build build --config Release`
+
+Only load DLLs you trust.
